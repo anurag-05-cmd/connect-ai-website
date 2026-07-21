@@ -47,7 +47,11 @@ export function Navigation() {
         >
           {/* Logo */}
           <a href="/" className="flex items-center gap-2 group">
-            <span className={`font-display font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary transition-all duration-500 ${isScrolled ? "text-xl" : "text-2xl"}`}>ConnectAI 2027</span>
+            <img
+              src="/logo1.svg"
+              alt="ConnectAI 2027"
+              className={`transition-all duration-500 object-contain ${isScrolled ? "h-10" : "h-15"}`}
+            />
           </a>
 
           {/* Desktop Navigation */}

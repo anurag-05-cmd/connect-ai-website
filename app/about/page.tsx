@@ -16,8 +16,12 @@ export default function AboutPage() {
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold mb-8">
             Shaping the Future of <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Connected Intelligence</span>
           </h1>
-          <p className="text-xl text-muted-foreground leading-relaxed max-w-3xl mb-12">
-            ConnectAI 2027 brings together researchers, industry leaders, and innovators from around the globe to explore the rapidly evolving landscape of artificial intelligence, connected systems, and digital transformation.
+          <p className="text-l text-muted-foreground leading-relaxed max-w-3xxl mb-12">
+            The rapid advancement of Artificial Intelligence, connected technologies, and digital ecosystems is transforming the way industries, governments, and societies operate. The 1st International Conference on Connected Intelligence and Digital Transformation (ConnectAI 2027) aims to serve as a premier global platform for researchers, academicians, industry professionals, entrepreneurs, and policymakers to share innovative ideas, cutting-edge research, and practical solutions that drive the next generation of intelligent and interconnected systems.
+The conference focuses on the convergence of Artificial Intelligence (AI), Data Science, Internet of Things (IoT), Cybersecurity, Cloud Computing, Intelligent Automation, and Industry 5.0, highlighting their role in enabling sustainable and human-centric digital transformation. As organizations worldwide embrace digital innovation, there is an increasing need for intelligent systems that can seamlessly connect people, devices, data, and processes. ConnectAI 2027 seeks to address these challenges by fostering interdisciplinary discussions and collaborations that bridge the gap between academic research and industrial practice.
+Hosted by the Department of Computer Science & Engineering & Information Technology, Institute of Engineering & Management (IEM), Kolkata, the conference will feature keynote lectures by renowned experts, technical paper presentations, industry sessions, workshops, tutorials, panel discussions, and networking opportunities. The event will provide participants with valuable insights into emerging technologies, research trends, and real-world applications that are shaping the future of connected intelligence and digital transformation.
+The conference welcomes original research contributions, case studies, industrial experiences, and innovative applications from researchers and practitioners across academia, industry, and government organizations. Through knowledge exchange and collaborative engagement, ConnectAI 2027 aims to contribute to the development of intelligent, secure, and sustainable digital solutions for addressing contemporary global challenges.
+
           </p>
           <div className="grid md:grid-cols-2 gap-12">
             <div>

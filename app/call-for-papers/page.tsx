@@ -1,7 +1,64 @@
 import { Navigation } from "@/components/landing/navigation";
 import { FooterSection } from "@/components/landing/footer-section";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+
+const tracks = [
+  {
+    title: "Track 1: Artificial Intelligence & Data Analytics",
+    topics: [
+      "Machine Learning and Deep Learning",
+      "Generative AI and Large Language Models",
+      "Natural Language Processing", "Computer Vision and Pattern Recognition", 
+      "Explainable and Responsible AI", "Data Mining and Knowledge Discovery", 
+      "Big Data Analytics", "Predictive and Prescriptive Analytics", 
+      "AI in Healthcare, Finance, and Industry", "Business Intelligence",
+    ],
+  },
+  {
+    title: "Track 2: Connected Systems, IoT & Smart Computing",
+    topics: [
+      "Internet of Things (IoT) ",
+      "Cyber-Physical Systems",
+      "Smart Cities and Smart Infrastructure ", "Smart Healthcare Systems ", 
+      "Intelligent Transportation Systems", "Wireless Sensor Networks ", 
+      "Edge and Fog Computing", "Embedded and Real-Time Systems ", 
+      "Autonomous and Intelligent Devices", "Green and Sustainable Computing ",
+      "Bioinformatics & Computational Biology",
+    ],
+  },
+  {
+    title: "Track 3: Cloud Computing, Networks & Digital Infrastructure",
+    topics: [
+      "Cloud and Distributed Computing",
+      "Edge-Cloud Integration ",
+      "High-Performance Computing", "Software-Defined Networking", 
+      "Network Function Virtualization", "5G and Beyond (6G) Networks", 
+      "Internet Architecture and Future Networks", "Resource Management and Scheduling", 
+      "Network Intelligence and Optimization", "Digital Infrastructure for Smart Applications",
+    ],
+  },
+  {
+    title: "Track 4: Cybersecurity, Blockchain & Digital Trust",
+    topics: [
+      "Information and Network Security",
+      "Cyber Threat Intelligence",
+      "Blockchain and Distributed Ledger Technologies", "Privacy-Preserving Technologies", "Secure Software Engineering", "Digital Forensics",
+      "Authentication and Access Control", "Cryptographic Techniques", "Trustworthy AI and Secure AI Systems", "Cybersecurity for IoT and Smart Systems",
+    ],
+  },
+  {
+    title: "Track 5: Industry 5.0, Digital Transformation & Emerging Technologies",
+    topics: [
+      "Industry 5.0 and Smart Manufacturing",
+      "Digital Twins and Intelligent Automation",
+      "Robotics and Human–Machine Collaboration", "Industrial AI Applications", "FinTech, HealthTech, and EdTech Innovations"
+      ,"Quantum Computing", "Augmented, Virtual, and Mixed Reality (AR/VR/MR)", "Metaverse Technologies"
+      ,"Sustainable Digital Transformation", "Innovation Management and Digital Business Models"
+    ],
+  },
+];
 
 export default function CallForPapersPage() {
   return (
@@ -51,17 +108,23 @@ export default function CallForPapersPage() {
               <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                 <span className="text-6xl font-display text-primary">02</span>
               </div>
-              <h3 className="text-2xl font-bold mb-4 font-display">Topics of Interest</h3>
-              <ul className="space-y-2 text-muted-foreground list-disc list-inside">
-                <li>Machine Learning & Deep Learning</li>
-                <li>Natural Language Processing</li>
-                <li>Computer Vision</li>
-                <li>AI in Healthcare & Medicine</li>
-                <li>Autonomous Systems & Robotics</li>
-                <li>Ethics, Privacy, and Security in AI</li>
-                <li>Digital Twins and Smart Cities</li>
-                <li>Edge Computing & IoT</li>
-              </ul>
+              <h3 className="text-2xl font-bold mb-4 font-display">Conference Tracks</h3>
+              <Accordion type="single" collapsible className="w-full space-y-2">
+                {tracks.map((track) => (
+                  <AccordionItem key={track.title} value={track.title} className="border border-foreground/10 rounded-xl px-4 bg-background/40">
+                    <AccordionTrigger className="text-left text-sm font-semibold text-foreground hover:no-underline py-3">
+                      {track.title}
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <ul className="space-y-2 text-muted-foreground list-disc list-inside pl-2 pb-2">
+                        {track.topics.map((topic) => (
+                          <li key={topic}>{topic}</li>
+                        ))}
+                      </ul>
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
             </div>
           </div>
 

@@ -22,7 +22,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: 'ConnectAI 2027 - International Conference',
   description: 'ConnectAI 2027 – International Conference on Connected Intelligence and Digital Transformation',
-  generator: 'v0.app',
+  generator: 'Saras & Anurag',
 }
 
 export default function RootLayout({

@@ -18,7 +18,7 @@ export default function VenuePage() {
           
           <div className="grid lg:grid-cols-2 gap-16 items-start mt-16">
             <div>
-              <h2 className="text-3xl font-bold font-display mb-6">Global Innovation Center</h2>
+              <h2 className="text-3xl font-bold font-display mb-6">West Bengal</h2>
               <p className="text-xl text-muted-foreground leading-relaxed mb-8">
                 ConnectAI 2027 will be hosted at the state-of-the-art Global Innovation Center, featuring world-class facilities designed for collaboration and technical showcases.
               </p>
@@ -30,19 +30,11 @@ export default function VenuePage() {
                   </div>
                   <div>
                     <h3 className="font-bold text-lg">Address</h3>
-                    <p className="text-muted-foreground">100 Tech Boulevard, Silicon District<br />Innovation City, IC 94000</p>
+                    <p className="text-muted-foreground">Kolkata<br />Salt Lake</p>
                   </div>
                 </div>
                 
-                <div className="flex gap-4">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                    <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-lg">Accommodation</h3>
-                    <p className="text-muted-foreground">Special rates are available at the adjacent Grand Tech Hotel for all conference attendees.</p>
-                  </div>
-                </div>
+                
               </div>
             </div>
             

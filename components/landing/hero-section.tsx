@@ -104,11 +104,13 @@ export function HeroSection() {
         {/* Description */}
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-end">
           <p 
-            className={`text-xl lg:text-2xl text-muted-foreground leading-relaxed max-w-xl transition-all duration-700 delay-200 ${
+            className={`text-l lg:text-l text-muted-foreground leading-relaxed max-w-l transition-all duration-700 delay-200 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
           >
-            Join global leaders exploring the intersection of Connected Intelligence and Digital Transformation.
+            Organized by: 
+Department of Computer Science & Engineering & Information Technology, Institute of Engineering & Management (IEM)
+
           </p>
           
           {/* CTAs */}
@@ -150,9 +152,9 @@ export function HeroSection() {
           {[...Array(2)].map((_, i) => (
             <div key={i} className="flex gap-16">
               {[
-                { value: "5,000+", label: "Attendees", company: "GLOBAL" },
+                { value: "5,000+", label: "Attendees", company: "" },
                 { value: "150+", label: "Speakers", company: "EXPERTS" },
-                { value: "40+", label: "Sessions", company: "TRACKS" },
+                { value: "5", label: "TRACKS", company: "Session" },
                 { value: "3", label: "Days", company: "EVENT" },
               ].map((stat) => (
                 <div key={`${stat.company}-${i}`} className="flex items-baseline gap-4">

@@ -1,8 +1,7 @@
-import { Navigation } from "@/components/landing/navigation";
-import { FooterSection } from "@/components/landing/footer-section";
+import { PageLayout } from "@/components/ui/page-layout";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Calendar, Bookmark, Clock, CheckCircle2 } from "lucide-react";
 
 const tracks = [
   {
@@ -61,10 +60,15 @@ const tracks = [
 ];
 
 export default function CallForPapersPage() {
+  const deadlines = [
+    { label: "Abstract Submission", date: "October 15, 2026", icon: Bookmark, passed: true },
+    { label: "Full Paper Submission", date: "November 1, 2026", icon: Clock, passed: false },
+    { label: "Author Notification", date: "January 15, 2027", icon: Calendar, passed: false },
+    { label: "Camera-Ready Due", date: "February 28, 2027", icon: CheckCircle2, passed: false },
+  ];
+
   return (
-    <main className="relative min-h-screen overflow-x-hidden noise-overlay flex flex-col">
-      <Navigation />
-      
+    <PageLayout>
       <section className="flex-1 pt-40 pb-20 px-6 lg:px-12 max-w-[1400px] mx-auto w-full">
         <div className="mb-12">
           <span className="inline-flex items-center gap-3 text-sm font-mono text-primary font-semibold tracking-wider uppercase mb-6">
@@ -75,69 +79,74 @@ export default function CallForPapersPage() {
             Call For <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Papers</span>
           </h1>
           <p className="text-xl text-muted-foreground leading-relaxed max-w-3xl mb-12">
-            We invite researchers and practitioners to submit their latest work on Artificial Intelligence, Machine Learning, and Digital Transformation.
+            We invite researchers and practitioners to submit their latest work on Artificial Intelligence, Machine Learning, and Digital Transformation. All accepted papers will be published in the conference proceedings.
           </p>
           
-          <div className="grid md:grid-cols-2 gap-12 mb-16">
-            <div className="p-8 border border-foreground/10 rounded-2xl bg-foreground/5 relative overflow-hidden group hover:border-primary/50 transition-colors">
-              <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                <span className="text-6xl font-display text-primary">01</span>
+          <div className="grid lg:grid-cols-12 gap-12 mb-16">
+            <div className="lg:col-span-5 space-y-8">
+              <div className="p-8 rounded-3xl bg-foreground/[0.02] border border-foreground/[0.05]">
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                    <Calendar className="w-6 h-6 text-primary" />
+                  </div>
+                  <h3 className="text-2xl font-bold font-display text-foreground">Important Dates</h3>
+                </div>
+                
+                <div className="space-y-6">
+                  {deadlines.map((item, idx) => {
+                    const Icon = item.icon;
+                    return (
+                      <div key={idx} className="flex items-start gap-4 group">
+                        <div className={`mt-1 w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${item.passed ? 'bg-foreground/10 text-foreground/50' : 'bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors'}`}>
+                          <Icon className="w-4 h-4" />
+                        </div>
+                        <div className="flex-1 border-b border-foreground/[0.05] pb-4 group-last:border-0 group-last:pb-0">
+                          <p className={`font-medium ${item.passed ? 'text-foreground/50 line-through' : 'text-foreground'}`}>{item.label}</p>
+                          <p className="text-sm text-muted-foreground mt-1">{item.date}</p>
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
               </div>
-              <h3 className="text-2xl font-bold mb-4 font-display">Important Dates</h3>
-              <ul className="space-y-4 text-muted-foreground">
-                <li className="flex justify-between border-b border-foreground/10 pb-2">
-                  <span>Abstract Submission:</span>
-                  <span className="text-foreground font-medium">October 15, 2026</span>
-                </li>
-                <li className="flex justify-between border-b border-foreground/10 pb-2">
-                  <span>Full Paper Submission:</span>
-                  <span className="text-foreground font-medium">November 1, 2026</span>
-                </li>
-                <li className="flex justify-between border-b border-foreground/10 pb-2">
-                  <span>Author Notification:</span>
-                  <span className="text-foreground font-medium">January 15, 2027</span>
-                </li>
-                <li className="flex justify-between pb-2">
-                  <span>Camera-Ready Due:</span>
-                  <span className="text-foreground font-medium">February 28, 2027</span>
-                </li>
-              </ul>
+
+              <div className="p-8 rounded-3xl bg-gradient-to-br from-primary/10 to-transparent border border-primary/20 text-center">
+                <h3 className="text-xl font-bold mb-4 font-display text-foreground">Ready to submit?</h3>
+                <p className="text-muted-foreground text-sm mb-6">Ensure your paper follows the IEEE formatting guidelines before submission.</p>
+                <Button size="lg" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground h-12 rounded-xl text-base font-medium shadow-sm transition-all hover:shadow-md hover:-translate-y-0.5">
+                  Submit Your Paper
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </div>
             </div>
             
-            <div className="p-8 border border-foreground/10 rounded-2xl bg-foreground/5 relative overflow-hidden group hover:border-primary/50 transition-colors">
-              <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                <span className="text-6xl font-display text-primary">02</span>
+            <div className="lg:col-span-7">
+              <div className="p-8 rounded-3xl bg-foreground/[0.02] border border-foreground/[0.05]">
+                <h3 className="text-2xl font-bold mb-8 font-display text-foreground">Conference Tracks</h3>
+                <Accordion type="single" collapsible className="w-full space-y-4">
+                  {tracks.map((track, i) => (
+                    <AccordionItem key={i} value={`track-${i}`} className="border border-foreground/[0.05] rounded-2xl px-6 bg-background hover:border-foreground/10 transition-colors data-[state=open]:border-primary/30">
+                      <AccordionTrigger className="text-left text-base font-semibold text-foreground hover:no-underline py-5 [&[data-state=open]]:text-primary transition-colors">
+                        {track.title}
+                      </AccordionTrigger>
+                      <AccordionContent className="pb-6">
+                        <div className="grid sm:grid-cols-2 gap-3 pt-2">
+                          {track.topics.map((topic, j) => (
+                            <div key={j} className="flex items-start gap-2">
+                              <div className="w-1.5 h-1.5 rounded-full bg-primary/50 mt-2 shrink-0" />
+                              <span className="text-sm text-muted-foreground leading-relaxed">{topic}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
               </div>
-              <h3 className="text-2xl font-bold mb-4 font-display">Conference Tracks</h3>
-              <Accordion type="single" collapsible className="w-full space-y-2">
-                {tracks.map((track) => (
-                  <AccordionItem key={track.title} value={track.title} className="border border-foreground/10 rounded-xl px-4 bg-background/40">
-                    <AccordionTrigger className="text-left text-sm font-semibold text-foreground hover:no-underline py-3">
-                      {track.title}
-                    </AccordionTrigger>
-                    <AccordionContent>
-                      <ul className="space-y-2 text-muted-foreground list-disc list-inside pl-2 pb-2">
-                        {track.topics.map((topic) => (
-                          <li key={topic}>{topic}</li>
-                        ))}
-                      </ul>
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
             </div>
-          </div>
-
-          <div className="flex justify-center">
-            <Button size="lg" className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-primary-foreground px-8 h-14 text-base font-bold rounded-full shadow-lg shadow-primary/25">
-              Submit Your Paper
-              <ArrowRight className="w-4 h-4 ml-2" />
-            </Button>
           </div>
         </div>
       </section>
-
-      <FooterSection />
-    </main>
+    </PageLayout>
   );
 }

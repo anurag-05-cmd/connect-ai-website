@@ -1,5 +1,5 @@
-import { Navigation } from "@/components/landing/navigation";
-import { FooterSection } from "@/components/landing/footer-section";
+import { PageLayout } from "@/components/ui/page-layout";
+import { User } from "lucide-react";
 
 export default function CommitteePage() {
   const committees = [
@@ -21,10 +21,18 @@ export default function CommitteePage() {
     }
   ];
 
+  const getInitials = (name: string) => {
+    return name
+      .replace(/Dr\.|Prof\./g, "")
+      .trim()
+      .split(" ")
+      .map(n => n[0])
+      .join("")
+      .substring(0, 2);
+  };
+
   return (
-    <main className="relative min-h-screen overflow-x-hidden noise-overlay flex flex-col">
-      <Navigation />
-      
+    <PageLayout>
       <section className="flex-1 pt-40 pb-20 px-6 lg:px-12 max-w-[1400px] mx-auto w-full">
         <div className="mb-12">
           <span className="inline-flex items-center gap-3 text-sm font-mono text-primary font-semibold tracking-wider uppercase mb-6">
@@ -38,15 +46,24 @@ export default function CommitteePage() {
             Meet the dedicated individuals behind ConnectAI 2027.
           </p>
           
-          <div className="space-y-16">
+          <div className="space-y-20">
             {committees.map((committee, idx) => (
               <div key={idx}>
-                <h2 className="text-3xl font-display font-bold mb-8 border-b border-foreground/10 pb-4">{committee.title}</h2>
+                <div className="flex items-center gap-4 mb-10">
+                  <h2 className="text-3xl font-display font-bold text-foreground">{committee.title}</h2>
+                  <div className="flex-1 h-px bg-gradient-to-r from-foreground/10 to-transparent" />
+                </div>
+                
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
                   {committee.members.map((member, index) => (
-                    <div key={index} className="p-6 border border-foreground/10 rounded-2xl bg-foreground/5 hover:border-primary/30 transition-colors">
-                      <h3 className="text-xl font-bold mb-2">{member.name}</h3>
-                      <p className="text-primary">{member.role}</p>
+                    <div key={index} className="group p-6 rounded-3xl bg-foreground/[0.02] border border-foreground/[0.05] hover:bg-foreground/[0.04] transition-all duration-300 flex items-center gap-5 hover:shadow-sm">
+                      <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 border border-primary/20 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform duration-300">
+                        <span className="font-display font-bold text-lg text-foreground/80 tracking-widest">{getInitials(member.name)}</span>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-foreground mb-1 font-display leading-tight">{member.name}</h3>
+                        <p className="text-sm text-primary font-medium">{member.role}</p>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -55,8 +72,6 @@ export default function CommitteePage() {
           </div>
         </div>
       </section>
-
-      <FooterSection />
-    </main>
+    </PageLayout>
   );
 }

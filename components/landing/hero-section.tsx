@@ -7,6 +7,62 @@ import { AnimatedSphere } from "./animated-sphere";
 
 const words = ["connect", "innovate", "transform", "lead"];
 
+const CHARS = "!<>-_\\/[]{}—=+*^?#_0123456789";
+
+function ScrambledWord({ targetWord }: { targetWord: string }) {
+  const [scrambleArray, setScrambleArray] = useState<{char: string, resolved: boolean}[]>(
+    targetWord.split("").map(c => ({ char: c, resolved: true }))
+  );
+
+  useEffect(() => {
+    let iteration = 0;
+    const maxIterations = 20; 
+    
+    const interval = setInterval(() => {
+      setScrambleArray((prev) => {
+        return targetWord.split("").map((actualChar, index) => {
+          const resolveThreshold = (index / targetWord.length) * maxIterations;
+          
+          if (iteration >= resolveThreshold) {
+            return { char: actualChar, resolved: true };
+          }
+          
+          return { 
+            char: CHARS[Math.floor(Math.random() * CHARS.length)], 
+            resolved: false 
+          };
+        });
+      });
+
+      if (iteration > maxIterations) {
+        clearInterval(interval);
+      }
+      
+      iteration++;
+    }, 30);
+
+    return () => clearInterval(interval);
+  }, [targetWord]);
+
+  return (
+    <span className="inline-block relative pb-2">
+      {scrambleArray.map((item, i) => (
+        <span 
+          key={i}
+          className={
+            item.resolved 
+              ? "text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary"
+              : "text-primary/70 font-mono font-bold"
+          }
+        >
+          {item.char}
+        </span>
+      ))}
+      <span className="absolute bottom-1 left-0 right-0 h-3 bg-primary/20 rounded-full" />
+    </span>
+  );
+}
+
 export function HeroSection() {
   const [isVisible, setIsVisible] = useState(false);
   const [wordIndex, setWordIndex] = useState(0);
@@ -76,26 +132,14 @@ export function HeroSection() {
             }`}
           >
             <span className="block">Intelligence</span>
-            <span className="block">
+            <span className="block flex items-end">
               to{" "}
-              <span className="relative inline-block">
-                <span 
-                  key={wordIndex}
-                  className="inline-flex text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary"
-                >
-                  {words[wordIndex].split("").map((char, i) => (
-                    <span
-                      key={`${wordIndex}-${i}`}
-                      className="inline-block animate-char-in"
-                      style={{
-                        animationDelay: `${i * 50}ms`,
-                      }}
-                    >
-                      {char}
-                    </span>
-                  ))}
+              <span className="relative inline-block overflow-visible ml-4 pb-2">
+                {/* Invisible placeholder for stable width based on the longest word */}
+                <span className="invisible pr-4">transform</span>
+                <span className="absolute left-0 top-0 whitespace-nowrap">
+                  <ScrambledWord targetWord={words[wordIndex]} />
                 </span>
-                <span className="absolute -bottom-2 left-0 right-0 h-3 bg-primary/20" />
               </span>
             </span>
           </h1>
@@ -115,14 +159,14 @@ Department of Computer Science & Engineering & Information Technology, Institute
           
           {/* CTAs */}
           <div 
-            className={`flex flex-col sm:flex-row items-start gap-4 transition-all duration-700 delay-300 ${
+            className={`flex flex-col sm:flex-row items-start gap-6 transition-all duration-700 delay-300 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}
           >
             <Button 
               size="lg" 
               asChild
-              className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-primary-foreground px-8 h-14 text-base font-bold rounded-full shadow-lg shadow-primary/25 group"
+              className="btn-3d-primary px-8 h-14 text-base font-semibold group rounded-full text-white"
             >
               <a href="/registration">
                 Register Now
@@ -133,7 +177,7 @@ Department of Computer Science & Engineering & Information Technology, Institute
               size="lg" 
               variant="outline" 
               asChild
-              className="h-14 px-8 text-base rounded-full border-foreground/20 hover:bg-foreground/5 hover:text-primary transition-colors font-medium"
+              className="btn-3d-secondary h-14 px-8 text-base font-semibold rounded-full border-none"
             >
               <a href="/schedule">View Schedule</a>
             </Button>
@@ -144,25 +188,29 @@ Department of Computer Science & Engineering & Information Technology, Institute
       
       {/* Stats marquee - full width outside container */}
       <div 
-        className={`absolute bottom-24 left-0 right-0 transition-all duration-700 delay-500 ${
-          isVisible ? "opacity-100" : "opacity-0"
+        className={`absolute bottom-0 left-0 right-0 border-y border-foreground/10 bg-background/50 backdrop-blur-md py-6 transition-all duration-700 delay-500 ${
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
         }`}
       >
         <div className="flex gap-16 marquee whitespace-nowrap">
           {[...Array(2)].map((_, i) => (
-            <div key={i} className="flex gap-16">
+            <div key={i} className="flex gap-16 items-center">
               {[
-                { value: "5,000+", label: "Attendees", company: "" },
-                { value: "150+", label: "Speakers", company: "EXPERTS" },
-                { value: "5", label: "TRACKS", company: "Session" },
-                { value: "3", label: "Days", company: "EVENT" },
-              ].map((stat) => (
-                <div key={`${stat.company}-${i}`} className="flex items-baseline gap-4">
-                  <span className="text-4xl lg:text-5xl font-display text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">{stat.value}</span>
-                  <span className="text-sm font-medium text-foreground/80">
-                    {stat.label}
-                    <span className="block font-mono text-xs mt-1 text-primary">{stat.company}</span>
-                  </span>
+                { value: "5,000+", label: "Attendees", subtitle: "Global" },
+                { value: "150+", label: "Speakers", subtitle: "Industry Leaders" },
+                { value: "5", label: "Tracks", subtitle: "Technical Sessions" },
+                { value: "3", label: "Days", subtitle: "Immersive Event" },
+              ].map((stat, idx) => (
+                <div key={idx} className="flex items-center gap-6">
+                  <div className="flex items-baseline gap-3">
+                    <span className="text-4xl lg:text-5xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">{stat.value}</span>
+                    <div className="flex flex-col justify-center">
+                      <span className="text-sm font-bold text-foreground uppercase tracking-wider">{stat.label}</span>
+                      <span className="text-xs font-mono text-primary/80">{stat.subtitle}</span>
+                    </div>
+                  </div>
+                  {/* Divider dot between items */}
+                  <div className="w-1.5 h-1.5 rounded-full bg-foreground/20 ml-10" />
                 </div>
               ))}
             </div>

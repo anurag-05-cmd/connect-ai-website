@@ -73,7 +73,7 @@ export function Navigation() {
             <Button
               size="sm"
               asChild
-              className={`bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-primary-foreground font-semibold rounded-full transition-all duration-500 ${isScrolled ? "px-5 h-9 text-sm" : "px-6 h-10"}`}
+              className={`btn-3d-primary text-white font-semibold rounded-full ${isScrolled ? "px-6 h-10 text-sm" : "px-8 h-12 text-base"}`}
             >
               <a href="/registration">Register Now</a>
             </Button>
@@ -134,7 +134,7 @@ export function Navigation() {
           >
             <Button 
               asChild
-              className="flex-1 bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-primary-foreground font-bold rounded-full h-14 text-lg shadow-lg shadow-primary/25"
+              className="flex-1 btn-3d-primary text-white font-semibold rounded-full h-14 text-lg"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               <a href="/registration">Register Now</a>

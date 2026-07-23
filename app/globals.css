@@ -180,7 +180,7 @@
     }
 
     100% {
-      opacity: 1;
+      opacity: 3;
       filter: blur(0);
       transform: translateY(0);
     }
